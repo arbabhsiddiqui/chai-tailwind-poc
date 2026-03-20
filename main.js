@@ -4,6 +4,32 @@ const supportedCssClassType = {
   color: "color",
   fw: "font-weight",
   bg: "background-color",
+  bc: "border-color",
+  bs: "border-style",
+  d: "display",
+  align: "align-items",
+  justify: "justify-content",
+  direction: "flex-direction",
+};
+
+const supportedCssClassTypeWithPx = {
+  fs: "font-size",
+  bw: "border",
+  radius: "border-radius",
+  p: "padding",
+  m: "margin",
+  mx: "margin-inline",
+  my: "margin-block",
+  ml: "margin-inline-start",
+  mr: "margin-inline-end",
+  mb: "margin-block-end",
+  mt: "margin-block-start",
+  px: "padding-inline",
+  py: "padding-block",
+  pl: "padding-inline-start",
+  pr: "padding-inline-end",
+  pb: "padding-block-end",
+  pt: "padding-block-start",
 };
 
 console.log(selectedClasses);
@@ -16,13 +42,18 @@ selectedClasses.forEach((item) => {
     console.log(classItem);
 
     let text = classItem.split("-");
-    console.log(text);
 
-    let classKey = text[1];
-    let classValue = text[2];
+    text.shift();
+    console.log("dd", text);
+
+    let [classKey, classValue] = text;
 
     if (Object.keys(supportedCssClassType).includes(classKey)) {
       classString += `${supportedCssClassType[classKey]}:${classValue};`;
+    }
+
+    if (Object.keys(supportedCssClassTypeWithPx).includes(classKey)) {
+      classString += `${supportedCssClassTypeWithPx[classKey]}:${classValue}px;`;
     }
   });
 
