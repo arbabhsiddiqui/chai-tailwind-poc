@@ -10,11 +10,15 @@ const supportedCssClassType = {
   align: "align-items",
   justify: "justify-content",
   direction: "flex-direction",
+  listStyle: "list-style",
+  mx: "margin-inline",
 };
 
 const supportedCssClassTypeWithPx = {
   fs: "font-size",
-  bw: "border",
+  bw: "border-width",
+  mw: "max-width",
+  gap: "gap",
   radius: "border-radius",
   p: "padding",
   m: "margin",
@@ -48,11 +52,17 @@ selectedClasses.forEach((item) => {
 
     let [classKey, classValue] = text;
 
+    console.log(classKey, classValue);
+
     if (Object.keys(supportedCssClassType).includes(classKey)) {
       if (classValue.includes("[")) {
-        console.log(classValue);
+        // console.log(classValue);
 
         classValue = classValue.slice(1, -1);
+      }
+
+      if (classValue.includes("_")) {
+        classValue = classValue?.split("_").join("-");
       }
 
       classString += `${supportedCssClassType[classKey]}:${classValue};`;
