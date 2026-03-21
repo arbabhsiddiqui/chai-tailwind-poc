@@ -35,20 +35,26 @@ const supportedCssClassTypeWithPx = {
 console.log(selectedClasses);
 
 selectedClasses.forEach((item) => {
-  console.log(item);
+  // console.log(item);
 
   let classString = "";
   item.classList.forEach((classItem) => {
-    console.log(classItem);
+    // console.log(classItem);
 
     let text = classItem.split("-");
 
     text.shift();
-    console.log("dd", text);
+    // console.log("dd", text);
 
     let [classKey, classValue] = text;
 
     if (Object.keys(supportedCssClassType).includes(classKey)) {
+      if (classValue.includes("[")) {
+        console.log(classValue);
+
+        classValue = classValue.slice(1, -1);
+      }
+
       classString += `${supportedCssClassType[classKey]}:${classValue};`;
     }
 
